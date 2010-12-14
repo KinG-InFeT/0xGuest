@@ -1,0 +1,77 @@
+/*
+ *
+ * @project 0xGuest
+ * @author KinG-InFeT
+ * @licence GNU/GPL
+ *
+ * @file index.php
+ *
+ * @link http://0xproject.hellospace.net#0xGuest
+ *
+ */
+
+body {
+	background-color: black;
+	font-family: monospace;
+	font-size : 12px;
+	color: #fff;
+	height: 100%;
+	margin: 0;
+}
+
+textarea,input,select,button:hover {
+	 color: #333; 
+	 text-decoration: none;
+}
+
+input,textarea,select,button {
+	border: 1px solid #444;
+	background-color: #000;
+	color:#444;
+	margin: 0px auto;
+	font-family: monospace;
+	font-size:11px;
+}
+
+.comment {
+	font-family:Arial;
+	font-size:11px;
+	position: static;
+}
+
+table {
+	border: solid #FFFFFF 2pt;
+	border-color: gray;
+	border-collapse: collapse;
+	padding: 15px;
+}
+
+tr {
+	border: dashed #FFFFFF 1pt;
+}
+
+td {
+    border: dashed #FFFFFF 1pt;
+    padding-right: 2pt;
+    padding-left: 2pt;
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+	width: 60%;
+	font-size: 11px;
+}
+
+.admin_menu {
+	border: 2px solid #FFFFFF;
+	padding: 7px; 
+	text-align:center;
+}
+
+.footer {
+	border: none;
+	padding: 20px;
+	font-size: 11px;
+}
+
+a {
+	color:white;
+}

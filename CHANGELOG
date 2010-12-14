@@ -1,0 +1,74 @@
+>:CHANGELOG_
+
+ v2.0 - Beta ( First OOP Version)
+ 	[+] Aggiunti anche la possibilità di inserire propria mail e proprio sito web in ogni firma
+ 	[+] Installazione completamente rinnovata
+ 	[+] Spostato tutto su Database MySQL
+ 	[+] Possibilità di permettere se vogliamo far inserire le smile nelle firme oppure no
+ 	[+] COdice e sicurezza notevolmente migliorati
+ 	[+] Fixati tutti i Bug di tipo CSRF
+ 	[+] Traspostato il login da SESSIONI a COOKIE
+ 	[+] Possibilità di cambiare password
+ 	[+] Possibilità di canbiare alcuni settaggi come il titolo, le firme per pagina in modo molto più semplice
+ 	[+] Captcha completamente rinnovato e reso più complesso
+ 	[+] L'amministrazione completamente rinnovata e semplificata
+ 	
+#################################################################################################################
+
+ v1.4 (Stable Release)
+	[+] Completamente rivista l'installazione aggiungi controlli alla connessione mySQL ecc...
+		[+] Eliminato il file delete_install.php (la sua funzione ora integrata nell'installer)
+	[+] Inserito controllo connesisone in config.php
+	[+] Sistemato il Footer :P
+	[+] Aumentati i numeri di caratteri per ogni commento da 300 a 500
+	[+] Editato il Menu in Amministratore
+	[+] Aggiunta la possibilità di modificare il tema scritto in CSS direttamente dall'amministrazione
+	[+] Inserita la funzione logout direttamente nella index.php dell'amministrazione così da evitare CSRF
+		[+] Eliminata la pagina logout.php
+	[+] Riordinato l'intero codice e sistemata l'identazione
+	[+] Fixed Footer in edit.php
+	[+] Cambiata un pò la grafica Base
+	[+] Aggiunta info di queli smile possono essere inserite nel commento :P
+
+ v1.3.1
+	[+] Fixato piccolo errore nell'installazione :P
+
+ v1.3
+	[+] Piccole modifiche al file delete_install.php
+	[+] piccola modifica nell'installazione
+	[+] Inserito titolo Guestbook :P (dimenticato asd)
+	[+] L'intero codice completamente rivisto ed migliorato
+	[+] Creazione del Core
+	[+] Inserimento dell'IP di chi firma visibile solo all'admin
+	[+] Migliorato il login
+	[+] Inserita funzione view_ip per la index :P
+	[+] Inserita visualizzazione dell'IP nell'amministrazione
+	[+] Inserito vislualizzazione del numero totale di firme nel footer :P
+	
+ v1.2 (Fix)
+	[+] Ricodata tutto il login per l'amministrazione
+	[+] Sistemato l'installer
+	[+] Password Crittografata in md5
+	[+] Fixed SQL Injection in index.php
+	[+] Inserito Logout
+	[+] Revisione del file install.php
+
+ v1.1 (Stable/First Release)
+	[+] Creata installazione automatica
+	[+] inserito controllo installazione
+	[+] Sistemato un pò il codice
+	[+] Sistemata di molto l'amminiztrazione
+		[+] inserito funzione Delete All (cancella tutte le firme isnerite)
+	[+] Inserito Login in amministrazione basato sui cookie
+	[+] Inserita possibilità di cancellare anche una singola firma ;)
+
+ v1.0b (Testing/Not Publicate)
+	[+] Modulo per inserimento commenti
+	[+] Modulo amministrativo (molto abbozzato asd)
+	[+] Inserita impaginazione
+	[+] Inserita finestra di inserimento firma cazzuta (viva il js thanks FL3` )
+	[+] Inserimento BBcode
+	[+] Inseriti svariati controlli
+	[+] Inserito Captcha
+	[+] Un pò di css per la grafica
+	[+] Sistemata la pagina inserit.php
