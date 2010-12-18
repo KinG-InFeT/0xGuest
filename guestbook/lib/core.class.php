@@ -100,7 +100,6 @@ class Core extends Security {
 		. "\n}"
 		. "\n</script>"
 		. "\n</head><body onLoad=\"return focuson();\" />"
-		. "\n<h2 align=\"center\">".$this->title."</h2>";
 		. "";
 	}
 	

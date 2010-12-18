@@ -84,7 +84,8 @@ class Login extends Security {
 					die("<div id=\"error\"><b>Error! username or Password does not correct!</b><br /><br />\n<a href=\"admin.php\">Back</a></div>");
 			}else{
 			
-				die(  "\n<fieldset>"
+				die(  "\n<h2 align=\"center\">Administration - 0xGuest</h2>"
+					. "\n<fieldset>"
 		   			. "\n<legend>Login</legend>"
 					. "\n     <br /><p align=\"center\">"
 					. "\n     <FORM action=\"admin.php\" method=\"POST\">"
