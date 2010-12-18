@@ -21,16 +21,15 @@ Upgrade? <input type="radio" name="check" value="yes"/>Yes  <input type="radio" 
 <input type="submit" value="Send" />
 </form>
 <?php
-//ALTER TABLE guestbook_config ADD `limit` int
 if((@$_GET['send'] == 1) && !empty($_POST['check']) && !empty($_POST['prefix'])) {
 	
 	if(@$POST['check'] == 'no')
 		die(header('Location: index.php'));
-		
-	$prefix = mysql_real_escape_string( htmlspecialchars( stripslashes( $_POST['prefix'] )));
 	
 	  mysql_connect($db_host, $db_uname, $db_pass) or die(mysql_error());
-	mysql_select_db($db_name) or die(mysql_error());
+	mysql_select_db($db_name) or die(mysql_error());	
+	
+	$prefix = mysql_real_escape_string( htmlspecialchars( stripslashes( $_POST['prefix'] )));
 	
 	//rinomino la tabella dei sorgenti pastati
 	mysql_query("RENAME TABLE `".$db_name."`.`0xGuest` TO `".$db_name."`.`".$prefix."signatures` ;") or die(mysql_error());

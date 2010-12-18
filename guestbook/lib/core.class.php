@@ -19,7 +19,7 @@ if(!defined("__INSTALLED__"))
 
 class Core extends Security {
 	
-	const VERSION = '2.0 - Beta';
+	const VERSION = '2.1';
 
 	public function __construct () {
 	
@@ -100,6 +100,7 @@ class Core extends Security {
 		. "\n}"
 		. "\n</script>"
 		. "\n</head><body onLoad=\"return focuson();\" />"
+		. "\n<h2 align=\"center\">".$this->title."</h2>";
 		. "";
 	}
 	
@@ -286,7 +287,7 @@ class Core extends Security {
 		
 		if($web_site != NULL) {
 			if($this->check_validate_url($web_site) == FALSE)
-				die("<script>alert(\"Error! Url web site NOT Valid! Exemple: http://www.miosito.com/\"); window.location=\"index.php\";</script>");			
+				die("<script>alert(\"Error! Url web site NOT Valid! Exemple: http://www.exemple.com/\"); window.location=\"index.php\";</script>");			
 		}else{
 			$web_site = "http://www.0xproject.hellospace.net/";    //default
 		}

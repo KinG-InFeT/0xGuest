@@ -28,8 +28,6 @@ if(!(is_writable('./config.php')))
 if(!(phpversion() >= '5.2.0')) {
 	die('PHP version is: '.phpversion().' ERROR! Upgrade to last version > 5');
 }
-		 
-include("config.php");
 
 if( isSet($_GET['delete_install']) && $_GET['delete_install'] == 1 ){
 	if( unlink("./install.php") == FALSE ){
@@ -116,21 +114,12 @@ if (   !empty( $_POST['password'] )
 	&& !empty( $_POST['user']     )
 	&& !empty( $_POST['prefix']   )
 	) {
-	
-	
-	//dati amministrazione
-	$pass_admin    = md5(VarProtect( $_POST['password'] ));
-	
-	//dati di configurazione
-	$title   = VarProtect( $_POST['title']    );
-	$prefix  = VarProtect( $_POST['prefix']   );
-	$limit   = (int) $_POST['limit'];
-	
+		
 	//Dati per connessione al MySQL
-	$host = VarProtect( $_POST['host'] );
-	$user = VarProtect( $_POST['user'] );
-	$pass = VarProtect( $_POST['pass'] );
-	$name = VarProtect( $_POST['name'] );
+	$host = htmlspecialchars( $_POST['host'] );
+	$user = htmlspecialchars( $_POST['user'] );
+	$pass = htmlspecialchars( $_POST['pass'] );
+	$name = htmlspecialchars( $_POST['name'] );
 	
 	//Dati Connessione MySQL e Connessione
 	$db_connect = @mysql_connect  ( $host, $user, $pass );
@@ -140,6 +129,15 @@ if (   !empty( $_POST['password'] )
 		die("<b>Errore durante la connessione al database MySQL</b><br>".mysql_errno()." : ".mysql_error());
 	elseif(!$db_select)
 		die("<b>Errore durante la selezione del database MySQL</b><br>".mysql_errno()." : ".mysql_error());
+	
+	//dati amministrazione
+	$pass_admin    = md5( $_POST['password'] );
+	
+	//dati di configurazione
+	$title   = VarProtect( $_POST['title']    );
+	$prefix  = VarProtect( $_POST['prefix']   );
+	$limit   = (int) $_POST['limit'];
+
 		
 	//creo la tabella users
 		

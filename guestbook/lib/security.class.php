@@ -1,13 +1,13 @@
 <?php
 /*
  *
- * @project 0xPaste
+ * @project 0xGuest
  * @author KinG-InFeT
  * @licence GNU/GPL
  *
  * @file security.class.php
  *
- * @link http://0xproject.hellospace.net#0xPaste
+ * @link http://0xproject.hellospace.net#0xGuest
  *
  */
  
