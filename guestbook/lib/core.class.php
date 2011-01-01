@@ -19,7 +19,7 @@ if(!defined("__INSTALLED__"))
 
 class Core extends Security {
 	
-	const VERSION = '2.1';
+	const VERSION = '2.2';
 
 	public function __construct () {
 	
@@ -35,7 +35,7 @@ class Core extends Security {
 	
 	$this->title = (preg_match("/admin/i",$_SERVER['PHP_SELF'])) ? "Administration - 0xGuest" : $this->config['title'];
 	
-	$this->check_active = ($this->config['inserit_smile'] == 1) ? "<font color=\"red\">[NO]</font>" : "<font color=\"green\">[YES]</font>";
+	$this->check_active = ($this->config['inserit_smile'] == 0) ? "<font color=\"red\">[NO]</font>" : "<font color=\"green\">[YES]</font>";
 	
 	print "\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		. "\n<html>"
@@ -260,6 +260,8 @@ class Core extends Security {
 	}
 	
 	public function inserit($author, $comment, $web_site, $email, $captcha) {
+	
+		$this->config = mysql_fetch_array($this->sql->sendQuery("SELECT inserit_smile FROM `".__PREFIX__."config`"));
 		
 		if($captcha != $_SESSION['captcha'])
 			die("<script>alert(\"Error! Captcha is NOT correct!\"); window.location=\"index.php\";</script>");
@@ -276,8 +278,11 @@ class Core extends Security {
 		if(strlen($comment) > 400)
 			die("<script>alert(\"Comment too big! Maximum 400 characters.\"); window.location=\"index.php\";</script>");
 		
-		if($this->check_include_smile($comment))
-			die("<script>alert(\"The system for the smile is not active!\"); window.location=\"index.php\";</script>");
+		if($this->config['inserit_smile'] == 0) {
+			if($this->check_include_smile($comment)) {
+				die("<script>alert(\"The system for the smile is not active!\"); window.location=\"index.php\";</script>");
+			}
+		}
 		
 		if($email != NULL) {
 			if($this->check_validate_email($email) == FALSE)

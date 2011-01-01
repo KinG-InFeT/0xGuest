@@ -23,7 +23,7 @@ Upgrade? <input type="radio" name="check" value="yes"/>Yes  <input type="radio" 
 <?php
 if((@$_GET['send'] == 1) && !empty($_POST['check']) && !empty($_POST['prefix'])) {
 	
-	if(@$POST['check'] == 'no')
+	if(@$_POST['check'] == 'no')
 		die(header('Location: index.php'));
 	
 	  mysql_connect($db_host, $db_uname, $db_pass) or die(mysql_error());
@@ -53,6 +53,12 @@ if((@$_GET['send'] == 1) && !empty($_POST['check']) && !empty($_POST['prefix']))
 	
 	//popolazione tabella config
 	mysql_query("INSERT INTO `".$prefix."config` (`title`, `inserit_smile`, `limit`) VALUES ('Upgraded 2.x Version', 1, ".$limit.");") or die(mysql_error());
+	
+	//aggiungo la colonna web_site
+	mysql_query("ALTER TABLE `".$db_name."`.`".$prefix."signatures` ADD web_site TEXT") or die(mysql_error());
+	
+	//aggiungo la colonna email
+	mysql_query("ALTER TABLE `".$db_name."`.`".$prefix."signatures` ADD email TEXT") or die(mysql_error());
 		
 	//creo il file config.php ;)
 	$config = '<?php

@@ -119,8 +119,8 @@ class Admin extends Security  {
 				. "\n	<td>Do you want to allow the inclusion in the signatures of smile?:</td>"
 				. "\n<td>"
 				. "\n<select name=\"inserit_smile\">"
-				. "\n<option value=\"1\">No</option>"
-				. "\n<option value=\"0\">Yes</option>"
+				. "\n<option value=\"0\">No</option>"
+				. "\n<option value=\"1\">Yes</option>"
 				. "\n</select>"
 				. "\n</td>"
 				. "\n</tr>"
@@ -146,7 +146,7 @@ class Admin extends Security  {
 		$update = NULL;
 		
 		if ($fsock = @fsockopen('www.0xproject.hellospace.net', 80, $errno, $errstr, 10)) {
-			@fputs($fsock, "GET /versions/0xGuest.txt HTTP/1.1\r\n");
+			@fputs($fsock, "GET /versions/0xBlog.txt HTTP/1.1\r\n");
 			@fputs($fsock, "HOST: www.0xproject.hellospace.net\r\n");
 			@fputs($fsock, "Connection: close\r\n\r\n");
 	
@@ -163,12 +163,15 @@ class Admin extends Security  {
 			@fclose($fsock);
 			
 			$update = htmlspecialchars($update);
+			
+			$update1  = str_replace(".", "", $update);
+			$version1 = str_replace(".", "", $version);
 	
-			if ($version == $update)
+			if ($version1 <= $update1)
 				$version_info = "<p style=\"color:green\">There are no updates for your system.</p><br />";
 			else
-				$version_info = "\n<p style=\"color:red\">Updates are available for the system.<br />\nUpgrade to the latest version:". $update."\n"
-							  . "<br /><br />Link Download: <a href=\"http://0xproject.hellospace.net/#0xGuest\">Download Recent Version</a><br /></p>\n";
+				$version_info = "\n<p style=\"color:red\">Updates are available for the system.<br />\nUpgrade to the latest version: ". $update."\n"
+							  . "<br /><br />Link Download: <a href=\"http://0xproject.hellospace.net/#0xBlog\">Download Recent Version</a><br />\n";
 		}else{
 			if ($errstr)
 				$version_info = '<p style="color:red">' . sprintf("Unable to open connection to 0xProject Server, reported error is:<br />%s", $errstr) . '</p>';

@@ -1,5 +1,12 @@
 >:CHANGELOG_
 
+v2.2 (Bug Fix)
+	[+] Fix in check Inserit Smile system
+	[+] Fix Update() function system
+	[+] Fixed Upgrade v1.4 to 2.0 or 2.1 or 2.2
+	[+] Fix class error in style.css added
+	[+] Fix write pagination in index.php
+
 v2.1 (BugFix)
 	[+] Fix minor bugs in installation file :D
 	[+] Added Title in admin.php

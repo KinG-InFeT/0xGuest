@@ -81,7 +81,7 @@ class Login extends Security {
 			if(!empty($_POST['pass'])) 
 			{	
 				if($this->send_login($_POST['pass']) == FALSE)
-					die("<div id=\"error\"><b>Error! username or Password does not correct!</b><br /><br />\n<a href=\"admin.php\">Back</a></div>");
+					die("<div class=\"error\"><b>Error! username or Password does not correct!</b><br /><br />\n<a href=\"admin.php\">Back</a></div>");
 			}else{
 			
 				die(  "\n<h2 align=\"center\">Administration - 0xGuest</h2>"

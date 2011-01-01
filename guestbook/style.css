@@ -75,3 +75,9 @@ td {
 a {
 	color:white;
 }
+
+.error {
+	text-align: center;
+	border-color: red;
+	border: dotted;
+}

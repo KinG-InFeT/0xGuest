@@ -163,7 +163,7 @@ if (   !empty( $_POST['password'] )
 	
 	echo "Table <b>'".$prefix."config'</b> created with success<br />\n";
 	
-	mysql_query("INSERT INTO ".$prefix."config (`title`, `inserit_smile`, `limit`) VALUES ('".$title."', 0, ".$limit.");") or die(mysql_error());
+	mysql_query("INSERT INTO ".$prefix."config (`title`, `inserit_smile`, `limit`) VALUES ('".$title."', 1, ".$limit.");") or die(mysql_error());
 		
 	echo "Table <b>'".$prefix."config'</b> populated with success<br />\n";
 			
