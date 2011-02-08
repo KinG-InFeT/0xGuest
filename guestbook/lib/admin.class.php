@@ -42,7 +42,7 @@ class Admin extends Security  {
 		
 			$this->commento = $this->sign['commento'];
 			$this->strl = strlen($this->sign['commento']); // lunghezza della stringa
-			$this->max_char = 150;
+			$this->max_char = 120;
 			
 			//thanks html.it
 			if ($this->strl >= $this->max_char) { // se più lunga di tot caratteri
@@ -146,7 +146,7 @@ class Admin extends Security  {
 		$update = NULL;
 		
 		if ($fsock = @fsockopen('www.0xproject.hellospace.net', 80, $errno, $errstr, 10)) {
-			@fputs($fsock, "GET /versions/0xBlog.txt HTTP/1.1\r\n");
+			@fputs($fsock, "GET /versions/0xGuest.txt HTTP/1.1\r\n");
 			@fputs($fsock, "HOST: www.0xproject.hellospace.net\r\n");
 			@fputs($fsock, "Connection: close\r\n\r\n");
 	
@@ -171,7 +171,7 @@ class Admin extends Security  {
 				$version_info = "<p style=\"color:green\">There are no updates for your system.</p><br />";
 			else
 				$version_info = "\n<p style=\"color:red\">Updates are available for the system.<br />\nUpgrade to the latest version: ". $update."\n"
-							  . "<br /><br />Link Download: <a href=\"http://0xproject.hellospace.net/#0xBlog\">Download Recent Version</a><br />\n";
+							  . "<br /><br />Link Download: <a href=\"http://0xproject.hellospace.net/#0xGuest\">Download Recent Version</a><br />\n";
 		}else{
 			if ($errstr)
 				$version_info = '<p style="color:red">' . sprintf("Unable to open connection to 0xProject Server, reported error is:<br />%s", $errstr) . '</p>';

@@ -1,5 +1,12 @@
 >:CHANGELOG_
 
+v2.3
+	[+] Fix in check Inserit Smile system (Sorry :P)
+	[+] Captcha Riscritto e notevolmente migliorato (Thanks DarkJoker)
+	[+] Inserito il Reload Captcha in js (Thanks d0mhc)
+	[+] SEO Optimizer (HTML validation)
+	[+] Minor bug fix
+
 v2.2 (Bug Fix)
 	[+] Fix in check Inserit Smile system
 	[+] Fix Update() function system

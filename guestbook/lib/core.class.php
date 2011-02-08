@@ -19,7 +19,7 @@ if(!defined("__INSTALLED__"))
 
 class Core extends Security {
 	
-	const VERSION = '2.2';
+	const VERSION = '2.3';
 
 	public function __construct () {
 	
@@ -31,76 +31,88 @@ class Core extends Security {
 	
 	public function PrintHeader() {
 	
-	$this->config = mysql_fetch_array($this->sql->sendQuery("SELECT title, inserit_smile FROM `".__PREFIX__."config`"));
+		$this->config = mysql_fetch_array($this->sql->sendQuery("SELECT title, inserit_smile FROM `".__PREFIX__."config`"));
+		
+		$this->title = (preg_match("/admin/i",$_SERVER['PHP_SELF'])) ? "Administration - 0xGuest" : $this->config['title'];
+		
+		$this->check_active = ($this->config['inserit_smile'] == 1) ? "<font color=\"green\">[YES]</font>" : "<font color=\"red\">[NO]</font>";
 	
-	$this->title = (preg_match("/admin/i",$_SERVER['PHP_SELF'])) ? "Administration - 0xGuest" : $this->config['title'];
-	
-	$this->check_active = ($this->config['inserit_smile'] == 0) ? "<font color=\"red\">[NO]</font>" : "<font color=\"green\">[YES]</font>";
-	
-	print "\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
-		. "\n<html>"
-		. "\n<head>"
-		. "\n<title>".$this->title."</title>"
-		. "\n<META name=\"Author\" content=\"KinG-InFeT\">"
-		. "\n<META name=\"Generator\" content=\"VIM\">"
-		. "\n<link rel = \"stylesheet\"  type = \"text/css\" href = \"style.css\">"
-		. "\n<script   language=\"javascript\">"
-		. "\nfunction focuson()  { "
-		. "\ndocument.addcomment.number.focus()"
-		. "\n}"
-		. "\n function check()  {"
-		. "\nif(document.addcomment.number.value==0)   {"
-		. "\n	          alert(\"Security!\\n Enter the code Captcha.\");"
-		. "\n	         document.addcomment.number.focus();"
-		. "\n	     return false;"
-		. "\n	}"
-		. "\n}"
-		. "\nfunction aggiungi(toggle)  {"
-		. "\nvar body = document.getElementsByTagName('body')[0];"
-		. "\n	if (toggle)  {"
-		. "\n	if (document.getElementById('desc'))  {"
-		. "\n		var desc = document.getElementById('desc');"
-		. "\n		body.removeChild(desc);"
-		. "\n		return;"
-		. "\n	}"
-		. "\n		var width = 500;"
-		. "\n       var top = 400;"
-		. "\n	var desc = document.createElement('div');"
-		. "\n	desc.setAttribute('id', 'desc');"
-		. "\n	desc.style.border = '1px dotted #444';"
-		. "\n	desc.style.position = 'absolute';"
-		. "\n	desc.style.width = width + 'px';"
-		. "\n   desc.style.top = top + 'px';"
-		. "\n	desc.style.marginLeft = (screen.width/2 - width/2) + 'px';"
-		. "\n	desc.style.marginTop  = '-200px';"
-		. "\n	desc.style.backgroundColor = '#000';"
-		. "\n	desc.style.padding = '10px';"
-		. "\n	desc.style.zIndex = '2';"
-		. "\n	desc.style.textAlign = 'left';"
-		. "\n	desc.style.opacity = 0.9;"
-		. "\n		desc.innerHTML = "
-		. "\n		'<a href=javascript:aggiungi(false) style=text-decoration: underline; text-align: right; font-size: 11px><p align = right>[X]</p></a><br />' +"
-		. "\n		'<form name=\"aggiungi\" action=\"index.php?mode=inserit\" method=\"POST\" onSubmit=\"return check();\">' +"
-		. "\n		'<b>Nick: </b><br/><input type=\"text\" name=\"author\" /><br />'+"
-		. "\n		'<b>Web Site: </b><br/><input type=\"text\" name=\"web_site\" /><br />'+"
-		. "\n		'<b>E-Mail: </b><br/><input type=\"text\" name=\"email\" /><br /><br />'+"
-		. "\n		'Smile-> :), :D, ;), ^_^,  :( _<br />'+"
-		. "\n		'Smile System Active? ".$this->check_active."<br />'+"
-		. "\n		'<b>Comment: </b><br/><textarea name=\"comment\" cols=\"50\" rows=\"13\"></textarea><br /><br />'+"
-		. "\n		'<img src=\"lib/captcha.php\"><br />'+"
-		. "\n		'Enter Captcha Code (Case-Sensitive):<br />'+"
-		. "\n		'<input name=\"number\" type=\"text\" id=\"number\"><br /><br />'+"
-		. "\n		'<input type=\"submit\" value=\"Send\" />'+"
-		. "\n		'</form>';"
-		. "\n	body.appendChild(desc);"
-		. "\n} else {"
-		. "\n	var desc = document.getElementById('desc');"
-		. "\n	body.removeChild(desc);"
-		. "\n}"
-		. "\n}"
-		. "\n</script>"
-		. "\n</head><body onLoad=\"return focuson();\" />"
-		. "";
+		$code = NULL;
+
+		for ($i = 0; $i < 3; $i++)
+			$code .= chr (rand (65,90));
+		
+		for ($i = 0; $i < 4; $i++)
+			$code .= rand (0,9);
+		
+		$_SESSION['captcha'] = $code;
+
+		$hash = md5 (rand (0,9999999));
+
+		$_SESSION['hash'] = $hash;
+		
+		print "\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+			. "\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">"
+			. "\n<head>"
+			. "\n<title>".$this->title."</title>"
+			. "\n<meta name=\"author\" content=\"KinG-InFeT\" />"
+			. "\n<meta name=\"generator\" content=\"VIM\" />"
+			. "\n<link rel = \"stylesheet\"  type = \"text/css\" href = \"style.css\" />"
+			. "\n<script type=\"text/javascript\" >"
+			. "\nfunction focuson()  { "
+			. "\n	document.addcomment.number.focus()"
+			. "\n}"
+			. "\nfunction reload_captcha(hash) {"
+			. "\n	var rnd = String(Math.random()); // Anti-cache-loading"
+			. "\n	span = document.getElementById('captcha');"
+			. "\n	span.innerHTML = '<img src=\"lib/captcha.php?hash=' + hash + '&rnd=' + rnd + '\">';"
+			. "\n}"
+			. "\nfunction aggiungi(toggle)  {"
+			. "\nvar body = document.getElementsByTagName('body')[0];"
+			. "\n	if (toggle)  {"
+			. "\n	if (document.getElementById('desc'))  {"
+			. "\n		var desc = document.getElementById('desc');"
+			. "\n		body.removeChild(desc);"
+			. "\n		return;"
+			. "\n	}"
+			. "\n		var width = 500;"
+			. "\n       var top = 400;"
+			. "\n	var desc = document.createElement('div');"
+			. "\n	desc.setAttribute('id', 'desc');"
+			. "\n	desc.style.border = '1px dotted #444';"
+			. "\n	desc.style.position = 'absolute';"
+			. "\n	desc.style.width = width + 'px';"
+			. "\n   desc.style.top = top + 'px';"
+			. "\n	desc.style.marginLeft = (screen.width/2 - width/2) + 'px';"
+			. "\n	desc.style.marginTop  = '-370px';"
+			. "\n	desc.style.backgroundColor = '#000';"
+			. "\n	desc.style.padding = '10px';"
+			. "\n	desc.style.zIndex = '2';"
+			. "\n	desc.style.textAlign = 'left';"
+			. "\n	desc.style.opacity = 0.9;"
+			. "\n		desc.innerHTML = "
+			. "\n		'<a href=javascript:aggiungi(false) style=text-decoration: underline; text-align: right; font-size: 11px><p align = right>[X]</p></a><br />' +"
+			. "\n		'<form name=\"aggiungi\" action=\"index.php?mode=inserit\" method=\"POST\" onSubmit=\"return check();\">' +"
+			. "\n		'<b>Nick: </b><br/><input type=\"text\" name=\"author\" /><br />'+"
+			. "\n		'<b>Web Site: </b><br/><input type=\"text\" name=\"web_site\" /><br />'+"
+			. "\n		'<b>E-Mail: </b><br/><input type=\"text\" name=\"email\" /><br /><br />'+"
+			. "\n		'Smile-> :), :D, ;), ^_^,  :( _<br />'+"
+			. "\n		'Smile System Active? ".$this->check_active."<br />'+"
+			. "\n		'<b>Comment: </b><br/><textarea name=\"comment\" cols=\"50\" rows=\"13\"></textarea><br /><br />'+"
+			. "\n		'<span id=\"captcha\"><img src=\"lib/captcha.php?hash=".$hash."&rnd=".rand(0,9999)."\" /></span> - <a href=\"javascript:reload_captcha(\'".$hash."\');\">Reload Captcha</a><br />'+"
+			. "\n		'Enter Captcha Code:<br />'+"
+			. "\n		'<input name=\"number\" type=\"text\" id=\"number\"><br /><br />'+"
+			. "\n		'<input type=\"submit\" value=\"Send\" />'+"
+			. "\n		'</form>';"
+			. "\n	body.appendChild(desc);"
+			. "\n} else {"
+			. "\n	var desc = document.getElementById('desc');"
+			. "\n	body.removeChild(desc);"
+			. "\n}"
+			. "\n}"
+			. "\n</script>"
+			. "\n</head><body onLoad=\"return focuson();\" />"
+			. "";
 	}
 	
 	private function Pagination ($numHits, $limit, $page) {
@@ -156,10 +168,10 @@ class Core extends Security {
 				
 				$this->commento = wordwrap($this->sign['commento'],100,"<br />",1);
 				
-				if($this->config['inserit_smile'] == 0)
+				if($this->config['inserit_smile'] == 1)
 					$this->commento = $this->Smile($this->commento);
 				
-				print "\n<table align=\"center\" style=\"width: 50%;\">"
+				print "\n<table align=\"center\" style=\"width: 50%;\" >"
 			      	. "\n<tbody>"
 					. "\n<tr><td><i>".$this->sign['nick']."</i> ~ <font size=\"2\">Written on ".$this->sign['data']."</font> ~ <a href=\"mailto:".$this->sign['email']."\"><img src=\"images/mail.png\" border=\"none\" /></a> ~ <a href=\"".$this->sign['web_site']."\" target=\"_blank\"><img src=\"images/web_site.png\" border=\"none\"/></a></td></tr>"
 		      		. "\n<tr><td><div class=\"comment\">".$this->commento."</div></td></tr>"
@@ -263,7 +275,7 @@ class Core extends Security {
 	
 		$this->config = mysql_fetch_array($this->sql->sendQuery("SELECT inserit_smile FROM `".__PREFIX__."config`"));
 		
-		if($captcha != $_SESSION['captcha'])
+		if(strtoupper($captcha) != $_SESSION['captcha'])
 			die("<script>alert(\"Error! Captcha is NOT correct!\"); window.location=\"index.php\";</script>");
 		
 		if(empty($author))
