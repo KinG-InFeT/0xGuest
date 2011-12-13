@@ -7,7 +7,7 @@
  *
  * @file install.php
  *
- * @link http://0xproject.hellospace.net#0xGuest
+ * @link http://0xproject.netsons.org#0xGuest
  *
  */
 
@@ -191,7 +191,7 @@ if (   !empty( $_POST['password'] )
  *
  * @file config.php
  *
- * @link http://0xproject.hellospace.net#0xGuest
+ * @link http://0xproject.netsons.org#0xGuest
  *
  */
 @define("__INSTALLED__", 1);
@@ -282,7 +282,7 @@ $db_name = "'.$name.'";
 ?>
 <br />
 <br />
-<div align="center"><font color="grey"><i>Powered By <a href="http://0xproject.hellospace.net/#0xGuest">0xGuest</a></i></font></div>
+<div align="center"><font color="grey"><i>Powered By <a href="http://0xproject.netsons.org/#0xGuest">0xGuest</a></i></font></div>
 </body>
 </html>
 

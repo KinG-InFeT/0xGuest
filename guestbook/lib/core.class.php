@@ -7,7 +7,7 @@
  *
  * @file core.class.php
  *
- * @link http://0xproject.hellospace.net#0xGuest
+ * @link http://0xproject.netsons.org#0xGuest
  *
  */
 
@@ -19,7 +19,7 @@ if(!defined("__INSTALLED__"))
 
 class Core extends Security {
 	
-	const VERSION = '2.3';
+	const VERSION = '2.3.1';
 
 	public function __construct () {
 	
@@ -212,7 +212,7 @@ class Core extends Security {
 		
 		print "\n<br /><br />"
 			. "\n<div class=\"footer\">"
-			. "\n<p style=\"float: left;\"><i>Powered By <a href=\"http://0xproject.hellospace.net/#0xGuest\">0xGuest</a> v".Core::VERSION."</i></p>\n"
+			. "\n<p style=\"float: left;\"><i>Powered By <a href=\"http://0xproject.netsons.org/#0xGuest\">0xGuest</a> v".Core::VERSION."</i></p>\n"
 			. "\n<p style=\"float: right;\">Signatures in Database: ".$this->signs."</p>\n"
 			. $this->footer_link
 			. "\n</div>"
@@ -305,7 +305,7 @@ class Core extends Security {
 			if($this->check_validate_url($web_site) == FALSE)
 				die("<script>alert(\"Error! Url web site NOT Valid! Exemple: http://www.exemple.com/\"); window.location=\"index.php\";</script>");			
 		}else{
-			$web_site = "http://www.0xproject.hellospace.net/";    //default
+			$web_site = "http://www.0xproject.netsons.org/";    //default
 		}
 		
 		//security parser

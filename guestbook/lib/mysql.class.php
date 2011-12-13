@@ -7,7 +7,7 @@
  *
  * @file mysql.class.php
  *
- * @link http://0xproject.hellospace.net#0xGuest
+ * @link http://0xproject.netsons.org#0xGuest
  *
  */
 
